@@ -1,0 +1,532 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Twitter Image
+            name: twitter:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: INVESTMENTS, key: 6c9fbbe0'
+            label: Text
+            name: 6c9fbbe0
+            widget: string
+          - hint: 'Original text: THE FOUNDER, key: -7b20a940'
+            label: Text
+            name: '-7b20a940'
+            widget: string
+          - hint: 'Original text: CONTACT US, key: 253fd2be'
+            label: Text
+            name: 253fd2be
+            widget: string
+          - hint: 'Original text: SCROLL TO DISCOVER ME, key: 72ac54bd'
+            label: Text
+            name: 72ac54bd
+            widget: string
+          - hint: 'Original text: #1 NICE TO MEET YOU, key: 4b8061da'
+            label: Text
+            name: 4b8061da
+            widget: string
+          - hint: >-
+              Original text: Hey, I'm YOLM LLC and you obviously love me because
+              as an investment firm, I've made promising smart investments that
+              will bring smiles to my partners' faces in the future. , key:
+              248d2132
+            label: Text
+            name: 248d2132
+            widget: text
+          - hint: >-
+              Original text: My current brightest investments are the two
+              below., key: 77e609db
+            label: Text
+            name: 77e609db
+            widget: string
+          - hint: 'Original text: #2 INVESTMENTS, key: -2641c251'
+            label: Text
+            name: '-2641c251'
+            widget: string
+          - hint: >-
+              Original text: A credit card that makes its users wealthy, key:
+              18b160f0
+            label: Text
+            name: 18b160f0
+            widget: string
+          - hint: >-
+              Original text: A fintech working on an epic credit card for the
+              zoomer generation. Feedback from influencers so far gives the
+              company's three founders confidence that this can be a disruptive
+              financial app and credit card. Snøbol has the potential to change
+              the lives of millions of young Americans through a better personal
+              finance future., key: -4938d732
+            label: Text
+            name: '-4938d732'
+            widget: text
+          - hint: 'Original text: /snobol.com, key: -296645b3'
+            label: Text
+            name: '-296645b3'
+            widget: string
+          - hint: >-
+              Original text: Consolidated purchase power for amazing vacations,
+              key: 14711107
+            label: Text
+            name: '14711107'
+            widget: string
+          - hint: >-
+              Original text: The company started consolidating purchasing power
+              in the tiny northern European countries of Estonia and Finland.
+              WOWW was the fastest growing company in the sector for several
+              consecutive years. The unwavering love of users gave the company's
+              founder the confidence to expand the concept to the US market as
+              well. , key: -453d8388
+            label: Text
+            name: '-453d8388'
+            widget: text
+          - hint: >-
+              Original text: The future looks exciting for the WOWW!, key:
+              -4066345c
+            label: Text
+            name: '-4066345c'
+            widget: string
+          - hint: 'Original text: /woww.com, key: 43c3f77a'
+            label: Text
+            name: 43c3f77a
+            widget: string
+          - hint: 'Original text: #3 ABOUT MY FOUNDER, key: -265e8ea2'
+            label: Text
+            name: '-265e8ea2'
+            widget: string
+          - hint: >-
+              Original text: Originally from Tallinn, Estonia, Kristian Kuutok
+              has developed B2C startup companies in the markets of Estonia,
+              Finland, Sweden and Latvia throughout his adult life. , key:
+              b5fa694
+            label: Text
+            name: b5fa694
+            widget: text
+          - hint: >-
+              Original text: From 2021, he resides in the US. Kristian has been
+              fortunate to be part of two fast-growing startup success stories
+              as a founder, as well as to work as a fund manager that
+              consistently outperforms the S&P 500. Kristian has created a
+              unique investment guide Black Snowball Strategy™. He loves
+              Seattle, WA but his heart also belongs to the quiet little home
+              island of Ormsö, Estland., key: 71e65e20
+            label: Text
+            name: 71e65e20
+            widget: text
+          - hint: >-
+              Original text: Kristian believes that simplicity is an art form.,
+              key: 63d4f8b6
+            label: Text
+            name: 63d4f8b6
+            widget: string
+          - hint: >-
+              Original text: "Go confidently in the direction of your dreams!
+              Live the life you've imagined. As you simplify your life, the laws
+              of the universe will be simpler." — Henry David Thoreau, key:
+              -2566ed4e
+            label: Text
+            name: '-2566ed4e'
+            widget: text
+          - hint: 'Original text: #4 ENJOYING THE GAME, key: 5b26e8fb'
+            label: Text
+            name: 5b26e8fb
+            widget: string
+          - hint: >-
+              Original text: Finally, life as a company is quite nice, but
+              instead of blood circulation, I have a balance sheet. Nothing
+              makes me happier than competent, ambitious and enthusiastically
+              innovating teams - because their honest and brave actions are
+              later followed by fascinating numbers., key: -7f888298
+            label: Text
+            name: '-7f888298'
+            widget: text
+          - hint: >-
+              Original text: Everything most important is invisible to the eye
+              at first glance. That, to me, is the magic of the game., key:
+              -2c80961f
+            label: Text
+            name: '-2c80961f'
+            widget: text
+          - hint: 'Original text: Sincerely yours, , key: -35a8a8f2'
+            label: Text
+            name: '-35a8a8f2'
+            widget: string
+          - hint: 'Original text: Yolm, key: 2a2337'
+            label: Text
+            name: 2a2337
+            widget: string
+          - hint: 'Original text: © 2024 Yolm LLC, key: -63ec39bd'
+            label: Text
+            name: '-63ec39bd'
+            widget: string
+          - hint: 'Original text: 999 Third Ave Seattle, WA 98104, key: -55a04454'
+            label: Text
+            name: '-55a04454'
+            widget: string
+          - hint: 'Original text: hello@yolm.com, key: -502fd628'
+            label: Text
+            name: '-502fd628'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: #investments, key: -66a3c03'
+            label: Link
+            name: '-66a3c03'
+            widget: string
+          - hint: 'Original link: #about-founder, key: -4eeb79d4'
+            label: Link
+            name: '-4eeb79d4'
+            widget: string
+          - hint: 'Original link: https://snobol.com, key: -51246313'
+            label: Link
+            name: '-51246313'
+            widget: string
+          - hint: 'Original link: https://woww.com, key: 5a5e021a'
+            label: Link
+            name: 5a5e021a
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: '-7de7cb8e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '18780730'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-62d34511'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-9a66760'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 77e0b4f8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 8e286bc
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: e73637
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 564387a4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-24c365c4'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 74ef3cd7
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6638f6fa
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '57657916'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
